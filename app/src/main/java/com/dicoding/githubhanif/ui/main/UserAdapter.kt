@@ -10,6 +10,7 @@ import com.dicoding.githubhanif.databinding.ItemUserBinding
 
 class UserAdapter(
     private val data: MutableList<ResponseUserGithub.Item> = mutableListOf(),
+    private val listener:(ResponseUserGithub.Item) -> Unit
 ) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -35,6 +36,9 @@ class UserAdapter(
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item = data[position]
         holder.bind(item)
+        holder.itemView.setOnClickListener{
+            listener(item)
+        }
     }
 
     override fun getItemCount(): Int = data.size

@@ -1,5 +1,6 @@
 package com.dicoding.githubhanif.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -8,10 +9,16 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.databinding.ActivityMainBinding
+import com.dicoding.githubhanif.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter by lazy { UserAdapter()  }
+    private val adapter by lazy { UserAdapter{
+            Intent(this, DetailActivity::class.java).apply {
+                putExtra("username", it.login)
+                startActivity(this)
+            }
+    }  }
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
 
