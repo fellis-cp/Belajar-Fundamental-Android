@@ -16,6 +16,15 @@ interface GithubService {
     suspend fun getDetailUser(@Path("username" )username: String) : ResponseDetailUser
 
 
+    @JvmSuppressWildcards
+    @GET("/users/{username}/following")
+    suspend fun getFollowing(@Path("username" )username: String) : MutableList<ResponseUserGithub.Item>
+
+    @JvmSuppressWildcards
+    @GET("/users/{username}/followers")
+    suspend fun getFollowers(@Path("username" )username: String) : MutableList<ResponseUserGithub.Item>
+
+
 
 
 }

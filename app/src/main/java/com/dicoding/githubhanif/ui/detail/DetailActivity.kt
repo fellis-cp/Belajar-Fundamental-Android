@@ -1,15 +1,21 @@
-package com.dicoding.githubhanif.detail
+package com.dicoding.githubhanif.ui.detail
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.dicoding.githubhanif.R
 import com.dicoding.githubhanif.api.model.ResponseDetailUser
 import com.dicoding.githubhanif.databinding.ActivityDetailBinding
+import com.dicoding.githubhanif.ui.follow.FollowFragment
+import com.dicoding.githubhanif.ui.follow.SectionPagerAdapter
 import com.dicoding.githubhanif.ui.main.Result
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
 
@@ -48,6 +54,40 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        val fragments = mutableListOf<Fragment>(
+            FollowFragment.newInstance(FollowFragment.FOLLOWER),
+            FollowFragment.newInstance(FollowFragment.FOLLOWING)
+        )
+
+        val titleFragments = mutableListOf(
+            getString(R.string.Follower) ,
+            getString(R.string.Following)
+        )
+
+        val adapter = SectionPagerAdapter(this , fragments)
+        binding.viewpager.adapter = adapter
+
+        TabLayoutMediator(binding.tab , binding.viewpager){tab, posisi ->
+            tab.text = titleFragments[posisi]
+        }.attach()
+
+        binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    viewmodel.getFollowers(username)
+                } else {
+                    viewmodel.getFollowing(username)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+        })
 
 
 

@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.databinding.ActivityMainBinding
-import com.dicoding.githubhanif.detail.DetailActivity
+import com.dicoding.githubhanif.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
 
