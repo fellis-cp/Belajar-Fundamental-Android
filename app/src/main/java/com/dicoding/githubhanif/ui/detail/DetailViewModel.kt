@@ -54,7 +54,6 @@ class DetailViewModel : ViewModel() {
             }.onCompletion {
                 userFollowingResult.value = Result.isLoad(false)
             }.catch {
-                Log.e("Error", it.message.toString())
                 it.printStackTrace()
                 userFollowingResult.value = Result.isError(it)
             }.collect {
@@ -79,7 +78,6 @@ class DetailViewModel : ViewModel() {
             }.onCompletion {
                 userFollowersResult.value = Result.isLoad(false)
             }.catch {
-                Log.e("Error", it.message.toString())
                 it.printStackTrace()
                 userFollowersResult.value = Result.isError(it)
             }.collect {

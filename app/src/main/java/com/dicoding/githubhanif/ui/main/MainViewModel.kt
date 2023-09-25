@@ -21,9 +21,7 @@ class MainViewModel : ViewModel() {
                 val response = ApiClient
                     .githubService
                     .searchUserGithub(mapOf(
-                        "q" to username,
-                        "per_page" to 15
-
+                        "q" to username
                     ))
 
                 emit(response)
