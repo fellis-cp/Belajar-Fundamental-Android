@@ -34,6 +34,8 @@ class DetailActivity : AppCompatActivity() {
                     }
 
                     binding.nama.text = user.name
+                    binding.follower.text = "Follower: ${user.followers}"
+                    binding.following.text = "Following: ${user.following}"
 
                 }
                 is Result.isError -> {

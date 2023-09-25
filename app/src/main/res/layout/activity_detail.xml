@@ -17,36 +17,42 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
+
     <TextView
         android:id="@+id/nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintBottom_toTopOf="@+id/tab"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
+        app:layout_constraintHorizontal_bias="0.738"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127"
         tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/follower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="96dp"
         android:text="@string/Follower"
-        app:layout_constraintEnd_toStartOf="@+id/following"
+        app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toBottomOf="@+id/nama" />
 
     <TextView
         android:id="@+id/following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
         android:text="@string/Following"
+        app:layout_constraintBottom_toBottomOf="@+id/follower"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintStart_toEndOf="@+id/follower"
         app:layout_constraintTop_toBottomOf="@+id/nama" />
 
     <com.google.android.material.tabs.TabLayout
