@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".detail.DetailActivity">
 
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
@@ -26,45 +27,43 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintBottom_toTopOf="@+id/tab"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.738"
+        app:layout_constraintHorizontal_bias="0.684"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/follower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Follower"
-        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintEnd_toEndOf="@+id/nama"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/nama"
         app:layout_constraintTop_toBottomOf="@+id/nama" />
 
     <TextView
         android:id="@+id/following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="@string/Following"
-        app:layout_constraintBottom_toBottomOf="@+id/follower"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.283"
-        app:layout_constraintStart_toEndOf="@+id/follower"
-        app:layout_constraintTop_toBottomOf="@+id/nama" />
+        app:layout_constraintEnd_toEndOf="@+id/nama"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/nama"
+        app:layout_constraintTop_toBottomOf="@+id/follower" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
-
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
@@ -85,6 +84,17 @@
         app:layout_constraintStart_toStartOf="@id/image"
         app:layout_constraintTop_toTopOf="@id/image"
         app:layout_constraintVertical_bias="0.519" />
+
+    <TextView
+        android:id="@+id/repository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/repository"
+        app:layout_constraintEnd_toEndOf="@+id/nama"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="@+id/nama"
+        app:layout_constraintTop_toBottomOf="@+id/following" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
