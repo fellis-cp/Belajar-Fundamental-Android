@@ -30,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra("username")?:""
 
         viewmodel.getDetailUser(username)
+        viewmodel.getFollowers(username)
 
         viewmodel.userDetailResult.observe(this){
             when(it){
@@ -44,6 +45,7 @@ class DetailActivity : AppCompatActivity() {
                     binding.following.text = "Following: ${user.following}"
                     binding.repository.text = "Repository: ${user.public_repos}"
 
+
                 }
                 is Result.isError -> {
                     Toast.makeText(this , it.exception.message.toString() , Toast.LENGTH_SHORT).show()
@@ -55,13 +57,13 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val fragments = mutableListOf<Fragment>(
-            FollowFragment.newInstance(FollowFragment.FOLLOWER),
+            FollowFragment.newInstance(FollowFragment.FOLLOWERS),
             FollowFragment.newInstance(FollowFragment.FOLLOWING)
         )
 
         val titleFragments = mutableListOf(
             getString(R.string.Follower) ,
-            getString(R.string.Following)
+            getString(R.string.Following),
         )
 
         val adapter = SectionPagerAdapter(this , fragments)
@@ -88,6 +90,9 @@ class DetailActivity : AppCompatActivity() {
             }
 
         })
+
+
+
 
 
 

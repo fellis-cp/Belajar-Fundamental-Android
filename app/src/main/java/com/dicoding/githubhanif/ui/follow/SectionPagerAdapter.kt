@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class SectionPagerAdapter(
-    frag: FragmentActivity,
+    fa: FragmentActivity,
     private val fragment: MutableList<Fragment>
-) : FragmentStateAdapter(frag) {
+) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int = fragment.size
     override fun createFragment(position: Int): Fragment = fragment[position]
 }
