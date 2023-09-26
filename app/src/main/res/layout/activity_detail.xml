@@ -37,10 +37,10 @@
         android:id="@+id/follower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:text="@string/Follower"
         app:layout_constraintEnd_toEndOf="@+id/nama"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/nama"
         app:layout_constraintTop_toBottomOf="@+id/nama" />
 
@@ -51,7 +51,7 @@
         android:layout_marginTop="4dp"
         android:text="@string/Following"
         app:layout_constraintEnd_toEndOf="@+id/nama"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="@+id/nama"
         app:layout_constraintTop_toBottomOf="@+id/follower" />
 
@@ -86,15 +86,13 @@
         app:layout_constraintVertical_bias="0.519" />
 
     <TextView
-        android:id="@+id/repository"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/repository"
+        android:text="@string/nama"
         app:layout_constraintEnd_toEndOf="@+id/nama"
-        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="@+id/nama"
-        app:layout_constraintTop_toBottomOf="@+id/following" />
+        app:layout_constraintTop_toBottomOf="@+id/nama" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

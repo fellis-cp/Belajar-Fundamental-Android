@@ -40,10 +40,10 @@ class DetailActivity : AppCompatActivity() {
                         transformations(CircleCropTransformation())
                     }
 
-                    binding.nama.text = user.name
+                    binding.nama.text = user.login
                     binding.follower.text = "Follower: ${user.followers}"
                     binding.following.text = "Following: ${user.following}"
-                    binding.repository.text = "Repository: ${user.public_repos}"
+                    binding.username.text = user.name
 
 
                 }
