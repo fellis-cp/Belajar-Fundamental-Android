@@ -1,17 +1,25 @@
 package com.dicoding.githubhanif.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.databinding.ActivityMainBinding
+import com.dicoding.githubhanif.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter by lazy { UserAdapter()  }
+    private val adapter by lazy { UserAdapter{
+            Intent(this, DetailActivity::class.java).apply {
+                putExtra("username", it.login)
+                startActivity(this)
+            }
+    }  }
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
 
@@ -21,7 +29,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         showRv()
 
-        viewModel.getUser()
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.getUser(query.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return  false
+            }
+
+
+        })
+
+
+
+
+
 
         viewModel.userResult.observe(this){
            when(it){
@@ -38,14 +62,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        viewModel.getUser("hanif")
 
     }
-
-
-
-
-
-
 
     private fun showRv () {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

@@ -15,12 +15,14 @@ class MainViewModel : ViewModel() {
 
  val userResult = MutableLiveData<Result>()
 
-    fun getUser() {
+    fun getUser(username: String) {
         viewModelScope.launch {
             flow {
                 val response = ApiClient
                     .githubService
-                    .getUser()
+                    .searchUserGithub(mapOf(
+                        "q" to username
+                    ))
 
                 emit(response)
             }.onStart {
@@ -32,7 +34,7 @@ class MainViewModel : ViewModel() {
                 it.printStackTrace()
                 userResult.value = Result.isError(it)
             }.collect {
-               userResult.value = Result.isSuccess(it)
+               userResult.value = Result.isSuccess(it.items)
             }
         }
     }
