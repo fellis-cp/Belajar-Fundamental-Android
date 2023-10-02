@@ -18,67 +18,55 @@ import com.dicoding.githubhanif.ui.main.UserAdapter
 class FollowFragment : Fragment() {
 
     private var binding: FragmentFollowBinding? = null
-    private val adapter by lazy {
-        UserAdapter {
-
-        }
-    }
+    private val adapter by lazy { UserAdapter {  } }
     private val viewModel by activityViewModels<DetailViewModel>()
-    var type = 0
+    private var type = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFollowBinding.inflate(layoutInflater)
+        binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRV()
+
+        when (type) {
+            FOLLOWERS -> viewModel.userFollowersResult.observe(viewLifecycleOwner, ::manageResultFollows)
+            FOLLOWING -> viewModel.userFollowingResult.observe(viewLifecycleOwner, ::manageResultFollows)
+        }
+    }
+
+    private fun setupRV() {
         binding?.rvFollows?.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             setHasFixedSize(true)
             adapter = this@FollowFragment.adapter
         }
-
-        when (type) {
-            FOLLOWERS -> {
-                viewModel.userFollowersResult.observe(viewLifecycleOwner, this::manageResultFollows)
-            }
-
-            FOLLOWING -> {
-                viewModel.userFollowingResult.observe(viewLifecycleOwner, this::manageResultFollows)
-            }
-        }
     }
 
     private fun manageResultFollows(state: Result) {
         when (state) {
-            is Result.isSuccess<*> -> {
-                adapter.setData(state.data as MutableList<ResponseUserGithub.Item>)
-            }
-            is Result.isError -> {
-                Toast.makeText(
-                    requireActivity(),
-                    state.exception.message.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            is Result.isLoad -> {
-                binding?.progressBar?.isVisible = state.isLoading
-            }
+            is Result.isSuccess<*> -> adapter.setData(state.data as MutableList<ResponseUserGithub.Item>)
+            is Result.isError -> showToast(state.exception.message.toString())
+            is Result.isLoad -> binding?.progressBar?.isVisible = state.isLoading
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
         const val FOLLOWING = 100
         const val FOLLOWERS = 101
 
-        fun newInstance(type: Int) = FollowFragment()
-            .apply {
-                this.type = type
-            }
+        fun newInstance(type: Int) = FollowFragment().apply {
+            this.type = type
+        }
     }
 }

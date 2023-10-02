@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private const val GITHUB_TOKEN = ""
+    private const val GITHUB_TOKEN = "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"
 
     private val okhttp = OkHttpClient.Builder()
         .apply {
