@@ -135,7 +135,6 @@ class DetailViewModel(private val db: DatabaseModul) : ViewModel() {
     class Factory(private val db: DatabaseModul) : ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T = DetailViewModel(db) as T
 
-
     }
 
 }

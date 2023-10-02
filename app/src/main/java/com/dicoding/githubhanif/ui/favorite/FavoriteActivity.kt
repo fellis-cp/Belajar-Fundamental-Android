@@ -3,7 +3,6 @@ package com.dicoding.githubhanif.ui.favorite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubhanif.databinding.ActivityFavoriteBinding
@@ -29,20 +28,22 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.rvFav.layoutManager = LinearLayoutManager(this)
-        binding.rvFav.adapter = adapter
+        rv()
     }
 
     override fun onResume() {
         super.onResume()
 
-        // Refresh the data by observing the LiveData again
+
         viewModel.getUserFav().observe(this) { favoriteUsersList ->
             adapter.setData(favoriteUsersList)
         }
     }
 
 
+   private fun rv(){
+        binding.rvFav.layoutManager = LinearLayoutManager(this)
+        binding.rvFav.adapter = adapter
+    }
 
 }

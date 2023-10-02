@@ -13,7 +13,6 @@ class FavViewModel(private val databaseModul: DatabaseModul) : ViewModel() {
 
     }
 
-
     fun getUserFav() = databaseModul.userDao.loadS()
 
 

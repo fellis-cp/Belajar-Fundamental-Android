@@ -16,9 +16,10 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val preferences : SettingPreferences) : ViewModel() {
 
-    fun geTheme() = preferences.getTema().asLiveData()
- val userResult = MutableLiveData<Result>()
 
+    val userResult = MutableLiveData<Result>()
+
+    fun geTheme() = preferences.getTema().asLiveData()
     fun getUser(username: String) {
         viewModelScope.launch {
             flow {
