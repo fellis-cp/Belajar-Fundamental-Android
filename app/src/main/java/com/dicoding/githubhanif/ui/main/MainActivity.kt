@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.databinding.ActivityMainBinding
 import com.dicoding.githubhanif.ui.detail.DetailActivity
 import com.dicoding.githubhanif.ui.favorite.FavoriteActivity
+import com.dicoding.githubhanif.ui.setting.SettingActivity
+import com.dicoding.githubhanif.ui.setting.SettingPreferences
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,13 +29,23 @@ class MainActivity : AppCompatActivity() {
             }
     }  }
     private lateinit var binding: ActivityMainBinding
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<MainViewModel>{
+        MainViewModel.Factory(SettingPreferences(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showRv()
+
+        viewModel.geTheme().observe(this) {
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
 
 
@@ -80,6 +93,12 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.favorite -> {
                 Intent(this, FavoriteActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+
+            R.id.setting -> {
+                Intent(this , SettingActivity::class.java).apply {
                     startActivity(this)
                 }
             }

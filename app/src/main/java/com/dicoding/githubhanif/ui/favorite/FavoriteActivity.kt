@@ -3,6 +3,7 @@ package com.dicoding.githubhanif.ui.favorite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubhanif.databinding.ActivityFavoriteBinding
@@ -41,4 +42,7 @@ class FavoriteActivity : AppCompatActivity() {
             adapter.setData(favoriteUsersList)
         }
     }
+
+
+
 }

@@ -3,16 +3,20 @@ package com.dicoding.githubhanif.ui.main
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.githubhanif.api.retrofit.ApiClient
+import com.dicoding.githubhanif.ui.setting.SettingPreferences
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val preferences : SettingPreferences) : ViewModel() {
 
+    fun geTheme() = preferences.getTema().asLiveData()
  val userResult = MutableLiveData<Result>()
 
     fun getUser(username: String) {
@@ -38,4 +42,11 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
+    class Factory(private val preferences: SettingPreferences):
+            ViewModelProvider.NewInstanceFactory(){
+        override fun <T : ViewModel> create(modelClass: Class<T>): T =
+            MainViewModel(preferences) as T
+            }
+
 }

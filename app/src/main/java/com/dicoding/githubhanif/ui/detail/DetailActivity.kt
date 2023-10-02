@@ -2,6 +2,7 @@ package com.dicoding.githubhanif.ui.detail
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.ColorRes
@@ -129,6 +130,17 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 
