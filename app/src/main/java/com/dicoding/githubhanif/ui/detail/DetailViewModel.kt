@@ -1,6 +1,7 @@
 package com.dicoding.githubhanif.ui.detail
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.api.retrofit.ApiClient
 import com.dicoding.githubhanif.local.DatabaseModul
+import com.dicoding.githubhanif.local.UserDao
 import com.dicoding.githubhanif.ui.main.Result
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -16,7 +18,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val db: DatabaseModul) : ViewModel() {
-
+    val isUserInDatabase: LiveData<Boolean> = MutableLiveData()
     val favDel = MutableLiveData<Boolean>()
     val favSucces = MutableLiveData<Boolean>()
     val userDetailResult = MutableLiveData<Result>()
@@ -96,6 +98,13 @@ class DetailViewModel(private val db: DatabaseModul) : ViewModel() {
 
     }
 
+    fun checkUserInDatabase(userId: Int) {
+        viewModelScope.launch {
+            val count = db.userDao.userExists(userId)
+            (isUserInDatabase as MutableLiveData).postValue(count > 0)
+        }
+    }
+
     fun setFav(item: ResponseUserGithub.Item?){
         viewModelScope.launch {
             item?.let {
@@ -112,7 +121,7 @@ class DetailViewModel(private val db: DatabaseModul) : ViewModel() {
         }
     }
 
-    fun isFavorite(id:Int, listenFavo: () -> Unit){
+    fun findFav(id:Int, listenFavo: () -> Unit){
         viewModelScope.launch{
            val favuser =  db.userDao.findById(id)
             if (favuser == null ){

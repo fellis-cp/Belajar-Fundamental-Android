@@ -19,8 +19,13 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE id LIKE :id LIMIT 1")
     fun findById(id: Int): ResponseUserGithub.Item
 
+    @Query("SELECT COUNT(*) FROM User WHERE id = :id")
+    fun userExists(id: Int): Int
+
     @Delete
     fun del(user: ResponseUserGithub.Item)
+
+
 
 
 

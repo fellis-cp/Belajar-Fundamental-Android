@@ -41,6 +41,14 @@ class DetailActivity : AppCompatActivity() {
         viewmodel.getDetailUser(username)
         viewmodel.getFollowers(username)
 
+        viewmodel.isUserInDatabase.observe(this) { isUserInDb ->
+            if (isUserInDb) {
+                binding.btnFavorite.changeIconColor(R.color.red)
+            } else {
+                binding.btnFavorite.changeIconColor(R.color.white)
+            }
+        }
+
 
         viewmodel.userDetailResult.observe(this){
             when(it){
@@ -105,8 +113,11 @@ class DetailActivity : AppCompatActivity() {
             viewmodel.setFav(item)
         }
 
-        viewmodel.isFavorite(item?.id ?: 0 ){
-            binding.btnFavorite.changeIconColor(R.color.red)
+        // Check if the user is in the database
+        viewmodel.checkUserInDatabase(item?.id ?: 0)
+
+        viewmodel.findFav(item?.id ?: 0 ){
+            binding.btnFavorite.changeIconColor(R.color.white)
         }
 
         viewmodel.favSucces.observe(this){
