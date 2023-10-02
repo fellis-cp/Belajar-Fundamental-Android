@@ -14,10 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubHanif"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".ui.Splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.setting.SettingActivity"
-            android:label="Pengaturan"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Pengaturan" />
         <activity
             android:name=".ui.favorite.FavoriteActivity"
             android:exported="false"

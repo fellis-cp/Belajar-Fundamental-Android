@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.api.retrofit.ApiClient
 import com.dicoding.githubhanif.local.DatabaseModul
-import com.dicoding.githubhanif.local.UserDao
 import com.dicoding.githubhanif.ui.main.Result
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
