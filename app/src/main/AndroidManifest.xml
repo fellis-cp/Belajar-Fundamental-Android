@@ -15,9 +15,12 @@
         android:theme="@style/Theme.GithubHanif"
         tools:targetApi="31">
         <activity
+            android:name=".ui.favorite.FavoriteActivity"
+            android:label="@string/fav"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.DetailActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

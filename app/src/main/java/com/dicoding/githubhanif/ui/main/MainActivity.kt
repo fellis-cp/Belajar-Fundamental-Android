@@ -2,21 +2,26 @@ package com.dicoding.githubhanif.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.githubhanif.R
 import com.dicoding.githubhanif.api.model.ResponseUserGithub
 import com.dicoding.githubhanif.databinding.ActivityMainBinding
 import com.dicoding.githubhanif.ui.detail.DetailActivity
+import com.dicoding.githubhanif.ui.favorite.FavoriteActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter by lazy { UserAdapter{
+    private val adapter by lazy { UserAdapter{user ->
             Intent(this, DetailActivity::class.java).apply {
-                putExtra("username", it.login)
+                putExtra("item", user)
                 startActivity(this)
             }
     }  }
@@ -28,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showRv()
+
+
 
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -41,9 +48,6 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-
-
-
 
 
 
@@ -64,6 +68,24 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getUser("hanif")
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                Intent(this, FavoriteActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showRv () {
