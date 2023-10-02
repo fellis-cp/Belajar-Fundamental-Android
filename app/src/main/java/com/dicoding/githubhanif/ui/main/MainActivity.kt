@@ -41,8 +41,10 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.geTheme().observe(this) {
             if (it) {
+
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
+
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
