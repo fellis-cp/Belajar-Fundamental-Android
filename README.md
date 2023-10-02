@@ -1,4 +1,4 @@
-# BFA-V2
+# Fundamental Android
 BFA Dicoding Submssion 1 & 2  Fixed
 - Main Branch is for submision 2
 - Final Branch is for submsion 1
